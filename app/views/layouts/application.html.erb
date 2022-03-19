@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html class="h-100">
+  <head>
+    <title>BestLunch</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%#= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+  <body class="d-flex h-100 text-center text-white bg-dark">
+
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="mb-auto">
+      <nav class="navbar navbar-dark" style="background-color: transparent;">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">BestLunch</a>
+        </div>
+      </nav>
+    </header>
+
+    <%= yield %>
+
+    <footer class="mt-auto text-white-50">
+      <p><a href="https://github.com/" class="text-white">Source code</a>.</p>
+    </footer>
+  </div>
+  </body>
+</html>
