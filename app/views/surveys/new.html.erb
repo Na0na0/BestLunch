@@ -1,14 +1,12 @@
 <main class="px-3">
-  <h1>New survey</h1>
+  <h1 class="py-3">New survey</h1>
 
-  <%= form_with model: @survey, html: { class: "row row-cols-lg-auto g-3 align-items-center" } do |form| %>
-    <div class="col-lg-10">
-      <div class="input-group">
-        <%= form.text_field :name, placeholder: "Write your survey name here", class: "form-control" %>
-      </div>
+  <%= simple_form_for @survey, html: { class: "row row-cols-lg-auto g-3 align-items-start" } do |form| %>
+    <div class="col-lg-9">
+      <%= form.input :name, label: false, placeholder: "Write your survey name here", class: "form-control" %>
     </div>
 
-    <div class="col-lg-2">
+    <div class="d-grid gap-2 col-lg-3 mx-auto">
       <%= form.submit "Create survey", class: "btn btn-primary" %>
     </div>
   <% end %>
