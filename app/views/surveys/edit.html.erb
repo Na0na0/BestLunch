@@ -2,21 +2,16 @@
   <h1 class="py-3">Editing survey</h1>
 
   <%= simple_form_for @survey do |form| %>
-    <div class="row mb-3">
-      <%= form.input :name, label: "Name of survey", placeholder: "Write your survey name here", input_html: { class: "mb-3" } %>
-      <label for="survey">Proposals</label>
-
+    <%= form.input :name, label: "Name of survey", placeholder: "Write your survey name here", input_html: { class: "mb-3" } %>
+    <label for="survey">Proposals</label>
+    <div id="proposals">
       <%= form.simple_fields_for :proposals do |proposals_form| %>
-        <div class="input-group mb-3">
-          <%= proposals_form.input_field :name, label: "Name of your proposal", class: "form-control" %>
-          <button class="btn btn-outline-danger" type="button" id="button-addon2">Delete</button>
-        </div>
+        <%= render 'proposal_fields', f: proposals_form %>
       <% end %>
-
     </div>
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <button type="button" class="btn btn-primary text-start">Add proposal</button>
+      <%= link_to_add_association 'add proposal', form, :proposals, class: "btn btn-primary text-start" %>
       <%= form.submit "Launch survey", class: "btn btn-success" %>
     </div>
   <% end %>

@@ -4,5 +4,5 @@ class Survey < ApplicationRecord
 
   has_many :proposals
 
-  accepts_nested_attributes_for :proposals
+  accepts_nested_attributes_for :proposals, allow_destroy: true
 end
