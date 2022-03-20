@@ -1,6 +1,13 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @survey %>
+<main class="px-3">
+  <h1 class="py-3"><%= @survey.name %></h1>
+
+  <h1 class="text-start">Proposals:</h1>
+  <% @survey.proposals.each do |proposal| %>
+    <h2 class="text-start"><%= proposal.name %></h2>
+  <% end %>
+</main>
 
 <div>
   <%= link_to "Edit this survey", edit_survey_path(@survey) %> |
