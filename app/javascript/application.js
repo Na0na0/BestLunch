@@ -6,3 +6,4 @@ import * as bootstrap from "bootstrap"
 require("@nathanvda/cocoon")
 
 import "./proposals"
+import "./voters"

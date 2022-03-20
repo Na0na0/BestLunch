@@ -3,9 +3,16 @@
 <main class="px-3">
   <h1 class="py-3"><%= @survey.name %></h1>
 
-  <h1 class="text-start">Proposals:</h1>
-  <% @survey.proposals.each do |proposal| %>
-    <h2 class="text-start"><%= proposal.name %></h2>
+  <h2 class="text-start">Proposals:</h2>
+  <% @proposals.each do |proposal| %>
+    <h3 class="text-start"><%= proposal.name %></h3>
+  <% end %>
+
+  <br/>
+
+  <h2 class="text-start">Voters:</h2>
+  <% @voters.each do |voter| %>
+    <h3 class="text-start"><%= voter.email %></h3>
   <% end %>
 </main>
 

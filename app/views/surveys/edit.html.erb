@@ -8,10 +8,22 @@
       <%= form.simple_fields_for :proposals do |proposals_form| %>
         <%= render 'proposal_fields', f: proposals_form %>
       <% end %>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-3">
+        <%= link_to_add_association 'add proposal', form, :proposals, class: "btn btn-primary text-start" %>
+      </div>
     </div>
 
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <%= link_to_add_association 'add proposal', form, :proposals, class: "btn btn-primary text-start" %>
+    <label for="survey">Voters</label>
+    <div id="voters">
+      <%= form.simple_fields_for :voters do |voters_form| %>
+        <%= render 'voter_fields', f: voters_form %>
+      <% end %>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-3">
+        <%= link_to_add_association 'add voter', form, :voters, class: "btn btn-primary text-start" %>
+      </div>
+    </div>
+
+    <div class="d-grid gap-2">
       <%= form.submit "Launch survey", class: "btn btn-success" %>
     </div>
   <% end %>

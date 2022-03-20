@@ -8,6 +8,8 @@ class SurveysController < ApplicationController
 
   # GET /surveys/1 or /surveys/1.json
   def show
+    @proposals = @survey.proposals
+    @voters = @survey.voters
   end
 
   # GET /surveys/new
@@ -18,8 +20,7 @@ class SurveysController < ApplicationController
   # GET /surveys/1/edit
   def edit
     2.times { @survey.proposals.build } if @survey.proposals.count == 0
-
-    @proposals = @survey.proposals
+    2.times { @survey.voters.build } if @survey.voters.count == 0
   end
 
   # POST /surveys or /surveys.json
@@ -68,6 +69,6 @@ class SurveysController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def survey_params
-      params.require(:survey).permit(:name, proposals_attributes: [:id, :name, :_destroy])
+      params.require(:survey).permit(:name, proposals_attributes: [:id, :name, :_destroy], voters_attributes: [:id, :email, :_destroy])
     end
 end
