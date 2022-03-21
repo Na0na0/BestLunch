@@ -68,15 +68,17 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
 
-  # mailtrap config
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { host: 'best-lunch.herokuapp.com' }
+
+  # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
-    :user_name => 'postmaster@sandboxf2e1d0e7f89a43aba8478ce041f59372.mailgun.org',
-    :password => '97ab77d6df159dc2774cd8768ce13f6c-0677517f-3fd9adaa',
-    :address => 'smtp.mailgun.org',
-    :domain => 'best-lunch.herokuapp.com',
-    :port => '587',
-    :authentication => :plain
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => <gmail_username>,
+    :password             => <gmail_password>,
+    :authentication       => "plain",
+    :enable_starttls_auto => true
   }
 
   config.action_mailer.default_url_options = { host: 'best-lunch.herokuapp.com' }
