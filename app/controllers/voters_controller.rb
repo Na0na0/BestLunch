@@ -27,6 +27,7 @@ class VotersController < ApplicationController
   def set_voter
     @voter = Voter.find_by(token: params[:token])
     @survey = @voter.survey
+    @proposals = @survey.proposals
   end
 
   def voter_params

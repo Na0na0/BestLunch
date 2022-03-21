@@ -2,11 +2,11 @@
   <h1 class="py-3">New survey</h1>
 
   <%= simple_form_for @survey, html: { class: "row row-cols-lg-auto g-3 align-items-start" } do |form| %>
-    <div class="col-lg-9">
+    <div class="col-lg-10">
       <%= form.input :name, label: false, placeholder: "Write your survey name here", class: "form-control" %>
     </div>
 
-    <div class="d-grid gap-2 col-lg-3 mx-auto">
+    <div class="d-grid gap-2 col-lg-2 mx-auto">
       <%= form.submit "Create survey", class: "btn btn-primary" %>
     </div>
   <% end %>
