@@ -17,10 +17,21 @@ class Survey < ApplicationRecord
   end
 
   def winner_proposal
-    scores_proposals.first[:proposal]
+    majority_mentions.first
   end
 
-  def scores_proposals
-    proposals.map(&:majority_rating).sort_by { |score| [-score[:name_value], -score[:rating_count]]  }
+  def majority_mentions
+    @majority_mentions ||= MajorityMentions.new(self)
+  end
+
+  # Sort the surveys's proposals from the highest ratings to the lowest
+  class MajorityMentions
+    attr_reader :proposals, :all, :first
+
+    def initialize(survey)
+      @proposals = survey.proposals
+      @all = proposals.map(&:majority_rating).sort_by { |score| [-score.value, -score.rating_count, -score.rating_sum] }
+      @first = all.first.proposal
+    end
   end
 end

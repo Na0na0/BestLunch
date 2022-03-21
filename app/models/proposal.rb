@@ -12,19 +12,30 @@ class Proposal < ApplicationRecord
   end
 
   def majority_mention
-    majority_rating[:name]
+    majority_rating.name
   end
 
-  # Determine which judgment has an absolute majority for this proposal
   def majority_rating
-    score = { name: "", name_value: -1, rating_count: 0, proposal: self }
-    return score if ratings.none?
+    @majority_rating ||= MajorityRating.new(ratings, self)
+  end
+  # Determine which rating has an absolute majority for this proposal
+  class MajorityRating
+    attr_reader :name, :value, :rating_count, :rating_sum, :proposal
 
-    ratings.order(name: :desc).pluck(:name).tally.each do |name, amount|
-      score[:rating_count] += amount
-      score[:name] = name
-      score[:name_value] = Rating::NAMES[name]
-      return score if score[:rating_count] > survey.number_of_votes / 2
+    def initialize(ratings, proposal)
+      @name = ""
+      @value = -1
+      @rating_count = 0
+      @rating_sum = ratings.sum(:name)
+      @proposal = proposal
+      return if ratings.none?
+
+      ratings.order(name: :desc).pluck(:name).tally.each do |name, amount|
+        @rating_count += amount
+        @name = name
+        @value = Rating::NAMES[name]
+        return if @rating_count > @proposal.survey.number_of_votes / 2
+      end
     end
   end
 end
