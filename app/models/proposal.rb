@@ -1,5 +1,6 @@
 class Proposal < ApplicationRecord
   validates :name, presence: true
+  validates_db_uniqueness_of :name, scope: :survey_id, rescue: :always
 
   has_many :ratings
   belongs_to :survey

@@ -1,5 +1,6 @@
 class Voter < ApplicationRecord
   validates :email, presence: true, email: true
+  validates_db_uniqueness_of :email, scope: :survey_id, rescue: :always
 
   has_secure_token
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_20_221805) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_21_122028) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,6 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_20_221805) do
     t.bigint "survey_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name", "survey_id"], name: "index_proposals_on_name_and_survey_id", unique: true
     t.index ["survey_id"], name: "index_proposals_on_survey_id"
   end
 
@@ -44,6 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_20_221805) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "token"
+    t.index ["email", "survey_id"], name: "index_voters_on_email_and_survey_id", unique: true
     t.index ["survey_id"], name: "index_voters_on_survey_id"
     t.index ["token"], name: "index_voters_on_token", unique: true
   end
