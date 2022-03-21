@@ -19,8 +19,12 @@ class SurveysController < ApplicationController
 
   # GET /surveys/1/edit
   def edit
-    2.times { @survey.proposals.build } if @survey.proposals.count == 0
-    2.times { @survey.voters.build } if @survey.voters.count == 0
+    if @survey.proposals.count == 0 && @survey.voters.count == 0
+      2.times { @survey.proposals.build }
+      2.times { @survey.voters.build }
+    else
+      redirect_to survey_url(@survey)
+    end
   end
 
   # POST /surveys or /surveys.json
