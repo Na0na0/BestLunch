@@ -74,7 +74,7 @@ Rails.application.configure do
     :user_name => 'postmaster@sandboxf2e1d0e7f89a43aba8478ce041f59372.mailgun.org',
     :password => '97ab77d6df159dc2774cd8768ce13f6c-0677517f-3fd9adaa',
     :address => 'smtp.mailgun.org',
-    :domain => 'sandboxf2e1d0e7f89a43aba8478ce041f59372.mailgun.org',
+    :domain => 'best-lunch.herokuapp.com',
     :port => '587',
     :authentication => :plain
   }
