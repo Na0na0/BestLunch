@@ -71,12 +71,12 @@ Rails.application.configure do
   # mailtrap config
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :user_name => 'e01de7daa17672',
-    :password => '5eb4148262c28e',
-    :address => 'smtp.mailtrap.io',
-    :domain => 'smtp.mailtrap.io',
-    :port => '2525',
-    :authentication => :cram_md5
+    :user_name => 'postmaster@sandboxf2e1d0e7f89a43aba8478ce041f59372.mailgun.org',
+    :password => '97ab77d6df159dc2774cd8768ce13f6c-0677517f-3fd9adaa',
+    :address => 'smtp.mailgun.org',
+    :domain => 'sandboxf2e1d0e7f89a43aba8478ce041f59372.mailgun.org',
+    :port => '587',
+    :authentication => :plain
   }
 
   config.action_mailer.default_url_options = { host: 'best-lunch.herokuapp.com' }
