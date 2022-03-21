@@ -10,6 +10,10 @@ class SurveysController < ApplicationController
   def show
     @proposals = @survey.proposals
     @voters = @survey.voters
+
+    if @proposals.none? || @voters.none?
+      redirect_to edit_survey_url(@survey), notice: "you need to add voters and proposals before checking the results"
+    end
   end
 
   # GET /surveys/new

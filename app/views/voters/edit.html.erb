@@ -3,7 +3,7 @@
 <main class="px-3">
   <div class="card my-3">
     <div class="card-header text-dark">
-      <%= @survey.name %>
+      <%= @voter.survey.name %>
     </div>
     <ul class="list-group list-group-flush">
       <%= simple_form_for @voter, url: voter_url(@voter.token) do |form| %>
@@ -11,6 +11,7 @@
           <li class="list-group-item d-flex justify-content-between">
             <h5 class="form-check-label"><%= ratings_form.object.proposal.name %> </h5>
             <div class="px-3">
+              <%= ratings_form.hidden_field :proposal_id %>
               <%= ratings_form.collection_radio_buttons :name, Rating::NAMES, :first, :first, item_wrapper_class: "px-2" do |b| %>
                 <%= b.label do %>
                   <%= b.radio_button %>
