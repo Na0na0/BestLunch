@@ -1,10 +1,31 @@
 <p style="color: green"><%= notice %></p>
 
 <main class="px-3">
-  <h1 class="py-3"><%= @survey.name %></h1>
-
-  <h2 class="text-start">Proposals:</h2>
-  <% @proposals.each do |proposal| %>
-    <h3 class="text-start"><%= proposal.name %></h3>
-  <% end %>
+  <div class="card">
+    <div class="card-header text-dark">
+      <%= @survey.name %>
+    </div>
+    <ul class="list-group list-group-flush">
+      <%= simple_form_for @voter, url: voter_url(@voter.token) do |form| %>
+        <%= form.simple_fields_for :ratings do |ratings_form| %>
+          <li class="list-group-item d-flex justify-content-between">
+            <h5 class="form-check-label"><%= ratings_form.object.proposal.name %> </h5>
+            <div class="px-3">
+              <%= ratings_form.collection_radio_buttons :name, Rating::NAMES, :first, :first, item_wrapper_class: "px-2" do |b| %>
+                <%= b.label do %>
+                  <%= b.radio_button %>
+                  <div class="px-2"><%= b.text %></div>
+                <% end %>
+              <% end %>
+            </div>
+          </li>
+        <% end %>
+        <div class="card-footer">
+          <div class="d-grid gap-2">
+            <%= form.submit "Confirm my vote", class: "btn btn-success" %>
+          </div>
+        </div>
+      <% end %>
+    </ul>
+  </div>
 </main>

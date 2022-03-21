@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "surveys#new"
 
-  resources :voters, only: [:edit], param: :token
+  resources :voters, only: [:edit, :update], param: :token
 end

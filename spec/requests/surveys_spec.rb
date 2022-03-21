@@ -17,11 +17,11 @@ RSpec.describe "/surveys", type: :request do
   # Survey. As you add validations to Survey, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { name: "Lunch Break" }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { name: "" }
   }
 
   describe "GET /index" do
@@ -63,9 +63,9 @@ RSpec.describe "/surveys", type: :request do
         }.to change(Survey, :count).by(1)
       end
 
-      it "redirects to the created survey" do
+      it "redirects to the edit form survey" do
         post surveys_url, params: { survey: valid_attributes }
-        expect(response).to redirect_to(survey_url(Survey.last))
+        expect(response).to redirect_to(edit_survey_url(Survey.last))
       end
     end
 
@@ -76,9 +76,9 @@ RSpec.describe "/surveys", type: :request do
         }.to change(Survey, :count).by(0)
       end
 
-      it "renders a successful response (i.e. to display the 'new' template)" do
+      it "renders an unprocessable response (i.e. to display the 'new' template)" do
         post surveys_url, params: { survey: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to be_unprocessable
       end
     end
   end
@@ -86,7 +86,16 @@ RSpec.describe "/surveys", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          proposals_attributes: {
+            0 => { name: "first proposal" },
+            1 => { name: "second proposal" }
+        },
+          voters_attributes: {
+            0 => { email: "voter@email.com" },
+            1 => { email: "voter2@email.com" }
+          }
+        }
       }
 
       it "updates the requested survey" do
@@ -105,10 +114,10 @@ RSpec.describe "/surveys", type: :request do
     end
 
     context "with invalid parameters" do
-      it "renders a successful response (i.e. to display the 'edit' template)" do
+      it "renders an unprocessable response (i.e. to display the 'edit' template)" do
         survey = Survey.create! valid_attributes
         patch survey_url(survey), params: { survey: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to be_unprocessable
       end
     end
   end

@@ -6,6 +6,9 @@ class Voter < ApplicationRecord
   after_create :send_invitation_link
 
   belongs_to :survey
+  has_many :ratings
+
+  accepts_nested_attributes_for :ratings
 
   private
 
