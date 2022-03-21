@@ -11,7 +11,7 @@ class Voter < ApplicationRecord
 
   accepts_nested_attributes_for :ratings
 
-  # private
+  private
 
   def send_invitation_link
     VoterMailer.with(voter: self).invitation_email.deliver_later

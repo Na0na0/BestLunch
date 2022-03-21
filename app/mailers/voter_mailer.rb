@@ -1,5 +1,5 @@
 class VoterMailer < ApplicationMailer
-  default from: 'notifications@example.com'
+  default from: ENV["SMTP_USERNAME"]
 
   def invitation_email
     @voter = params[:voter]
