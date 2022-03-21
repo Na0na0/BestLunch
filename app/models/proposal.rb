@@ -16,17 +16,14 @@ class Proposal < ApplicationRecord
 
   # Determine which judgment has an absolute majority for this proposal
   def majority_rating
-    rating_count = 0
+    score = { name: "", name_value: -1, rating_count: 0, proposal: self }
+    return score if ratings.none?
 
     ratings.order(name: :desc).pluck(:name).tally.each do |name, amount|
-      rating_count += amount
-      if rating_count > survey.number_of_votes / 2
-        return { name: name,
-                 name_value: Rating::NAMES[name],
-                 rating_count: rating_count,
-                 proposal: self
-        }
-      end
+      score[:rating_count] += amount
+      score[:name] = name
+      score[:name_value] = Rating::NAMES[name]
+      return score if score[:rating_count] > survey.number_of_votes / 2
     end
   end
 end
