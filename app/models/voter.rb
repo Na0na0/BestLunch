@@ -4,7 +4,7 @@ class Voter < ApplicationRecord
 
   has_secure_token
 
-  after_create :send_invitation_link
+  after_commit :send_invitation_link, on: :create
 
   belongs_to :survey
   has_many :ratings
