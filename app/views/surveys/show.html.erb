@@ -6,9 +6,9 @@
       <h2><%= @survey.name %></h2>
     </div>
     <ul class="list-group list-group-flush">
-      <% @survey.majority_mentions.all.each do |score| %>
+      <% @survey.scores.each do |score| %>
         <li class="list-group-item">
-          <h5 class="form-check-label text-start"><%= score.proposal.name %> : <%= score.proposal.majority_mention %></h5>
+          <h5 class="form-check-label text-start"><%= score.proposal.name %> : <%= score.name %></h5>
           <div class="progress" style="height: 25px;">
             <div class="progress-bar" role="progressbar" style="background-color: darkgreen; width: <%= score.proposal.excellent_percent %>%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"><%= score.proposal.excellent_percent %>%</div>
             <div class="progress-bar" role="progressbar" style="background-color: forestgreen; width: <%= score.proposal.very_good_percent %>%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"><%= score.proposal.very_good_percent %>%</div>
@@ -21,7 +21,7 @@
       <div class="card-footer">
         <div class="d-grid gap-2">
           <p class="text-dark"> Number of votes: <%= @survey.number_of_votes %> </p>
-          <p class="text-dark"> Winner: <%= @survey.winner_proposal.name %> </p>
+          <p class="text-dark"> Winner: <%= @survey.winner %> </p>
         </div>
       </div>
     </ul>
